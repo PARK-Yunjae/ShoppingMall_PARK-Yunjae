@@ -24,9 +24,9 @@ public class _MailMain implements MenuCommand{
 			System.out.println("프로그램 종료");
 			return false;
 		}else if(sel == 1) {
-			mallCont.setNext("MemberJoin");
+			mallCont.setNext("MallJoin").update();
 		}else if(sel == 2) {
-			mallCont.setNext("MemberLogin");
+			mallCont.setNext("MallLogin").update();
 		}
 		return true;
 	}

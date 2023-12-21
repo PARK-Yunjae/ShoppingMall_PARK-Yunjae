@@ -23,7 +23,7 @@ public class _MemberMain implements MenuCommand{
 		int sel = Util.getValue("메뉴 입력", 0, 5);
 		
 		if(sel == 0) {
-			mallCont.setNext("MallMain");
+			mallCont.setNext("MallMain").update();
 		}else if(sel == 1) {
 			mallCont.setNext("MemberShopping");
 		}else if(sel == 2) {

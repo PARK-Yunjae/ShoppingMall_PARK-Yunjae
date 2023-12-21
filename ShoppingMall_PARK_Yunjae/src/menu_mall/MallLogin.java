@@ -1,8 +1,8 @@
-package menu_admin;
+package menu_mall;
 
 import _mall.MenuCommand;
 
-public class AdminItem implements MenuCommand{
+public class MallLogin implements MenuCommand{
 
 	@Override
 	public void init() {

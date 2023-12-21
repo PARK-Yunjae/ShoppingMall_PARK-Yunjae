@@ -1,5 +1,9 @@
 package _mall;
 
-public class _Main {
+import controller.MallController;
 
+public class _Main {
+	public static void main(String[] args) {
+		MallController.getInstance();
+	}
 }
