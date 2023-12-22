@@ -10,36 +10,37 @@ import menu_member.*;
 
 public class MallController {
 
+	private MallController() {
+		//init();
+	}
+
 	private static MallController instance = new MallController();
 
 	public static MallController getInstance() {
 		return instance;
 	}
-	
-	public MallController() {
-		init();
-	}
-	
-	private Map<String, MenuCommand> mallCont;
-	
+
+	private Map<String, MenuCommand> mallList;
+
 	public void init() {
-		mallCont = new HashMap<String, MenuCommand>();
-		mallCont.put("MallMain", new _MailMain());
-		mallCont.put("MallJoin", new MallJoin());
-		mallCont.put("AdminMain", new _AdminMain());
-		mallCont.put("AdminBoard", new AdminBoard());
-		mallCont.put("AdminItem", new AdminItem());
-		mallCont.put("AdminMember", new AdminMember());
-		mallCont.put("MemberMain", new _MemberMain());
-		mallCont.put("MemberBoard", new MemberBoard());
-		mallCont.put("MemberCart", new MemberCart());
-		mallCont.put("MemberInfo", new MemberInfo());
-		mallCont.put("MemberItem", new MemberItem());
-		mallCont.put("MemberQuit", new MemberQuit());
-		mallCont.put("MemberShopping", new MemberShopping());
+		mallList = new HashMap<>();
+		mallList.put("MallMain", new _MailMain());
+		mallList.put("MallJoin", new MallJoin());
+		mallList.put("MallLogin", new MallLogin());
+		mallList.put("AdminMain", new _AdminMain());
+		mallList.put("AdminBoard", new AdminBoard());
+		mallList.put("AdminItem", new AdminItem());
+		mallList.put("AdminMember", new AdminMember());
+		mallList.put("MemberMain", new _MemberMain());
+		mallList.put("MemberBoard", new MemberBoard());
+		mallList.put("MemberCart", new MemberCart());
+		mallList.put("MemberInfo", new MemberInfo());
+		mallList.put("MemberItem", new MemberItem());
+		mallList.put("MemberQuit", new MemberQuit());
+		mallList.put("MemberShopping", new MemberShopping());
 	}
-	
+
 	public MenuCommand setNext(String key) {
-		return mallCont.get(key);
+		return mallList.get(key);
 	}
 }
