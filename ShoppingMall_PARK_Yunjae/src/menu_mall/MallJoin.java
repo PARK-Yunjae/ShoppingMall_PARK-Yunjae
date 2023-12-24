@@ -1,5 +1,8 @@
 package menu_mall;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import _mall.MenuCommand;
 import controller.MallController;
 import util.Util;
@@ -7,6 +10,7 @@ import util.Util;
 public class MallJoin implements MenuCommand{
 
 	private MallController mallCont;
+	private String pwPattern = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{4,20}$";
 
 	public MallJoin() {
 		init();
@@ -19,21 +23,24 @@ public class MallJoin implements MenuCommand{
 
 	@Override
 	public boolean update() {
-		System.out.println("===[ 널이다 ]===");
-		System.out.println("[1] 회원가입"); 
-		System.out.println("[2] 로그인"); 
-		System.out.println("[0] 종료");
-		int sel = Util.getValue("메뉴 입력", 0, 2);
-		
-		if(sel == 0) {
-			System.out.println("프로그램 종료");
+		mallCont.setNextMenu("MallMain");
+		String id = Util.getValue("ID");
+		int idIdx = mallCont.getmDAO().idValue(id);
+		if(idIdx != -1) {
+			System.out.println("중복 ID가 존재합니다");
 			return false;
-		}else if(sel == 1) {
-			mallCont.setNext("MallJoin").update();
-		}else if(sel == 2) {
-			mallCont.setNext("MallLogin").update();
 		}
-		return true;
+		String pw = Util.getValue("PW");
+		Pattern p = Pattern.compile(pwPattern);
+		Matcher m = p.matcher(pw);
+		if(!m.matches()) {
+			System.out.println("비밀번호는 4자 이상 20자 미만, 숫자 영단어가 포함되어야 합니다");
+			return false;
+		}
+		String name = Util.getValue("닉네임");
+		mallCont.getmDAO().CreateMember(id, pw, name);
+		System.out.println("가입 완료");
+		return false; 
 	}
 
 }

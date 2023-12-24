@@ -14,6 +14,7 @@ public class _AdminMain implements MenuCommand{
 
 	@Override
 	public boolean update() {
+		System.out.println("===[ 관리자 ]===");
 		System.out.println("[1] 회원관리"); 
 		System.out.println("[2] 상품관리"); 
 		System.out.println("[3] 게시판관리"); 
@@ -21,15 +22,19 @@ public class _AdminMain implements MenuCommand{
 		int sel = Util.getValue("메뉴 입력", 0, 3);
 		
 		if(sel == 0) {
-			mallCont.setNext("MallMain");
+			System.out.println("관리자 로그아웃");
+			mallCont.setId("");
+			mallCont.setNextMenu("MallMain");
 		}else if(sel == 1) {
-			mallCont.setNext("AdminMember");
+			mallCont.setNextMenu("AdminMember");
 		}else if(sel == 2) {
-			mallCont.setNext("AdminItem");
+			mallCont.setNextMenu("AdminProduct");
 		}else if(sel == 3) {
-			mallCont.setNext("AdminBoard");
+			mallCont.setNextMenu("AdminBoard");
+		}else {
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
 }

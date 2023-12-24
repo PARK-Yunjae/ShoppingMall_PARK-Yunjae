@@ -4,7 +4,7 @@ import _mall.MenuCommand;
 import controller.MallController;
 import util.Util;
 
-public class AdminItem implements MenuCommand{
+public class AdminCategory implements MenuCommand{
 	private MallController mallCont;
 
 	@Override
@@ -14,11 +14,11 @@ public class AdminItem implements MenuCommand{
 
 	@Override
 	public boolean update() {
-		System.out.println("===[ 관리자 : 아이템 관리]===");
-		System.out.println("[1] 아이템 추가");
-		System.out.println("[2] 아이템 수정");
-		System.out.println("[3] 아이템 삭제");
-		System.out.println("[4] 아이템 목록");
+		System.out.println("===[ 관리자 : 카테고리 관리]===");
+		System.out.println("[1] 카테고리 추가");
+		System.out.println("[2] 카테고리 수정");
+		System.out.println("[3] 카테고리 삭제");
+		System.out.println("[4] 카테고리 목록");
 		System.out.println("[0] 뒤로 가기");
 		int sel = Util.getValue("메뉴 입력", 0, 4);
 		
@@ -26,13 +26,13 @@ public class AdminItem implements MenuCommand{
 			System.out.println("관리자 상품관리로 갑니다");
 			mallCont.setNextMenu("AdminProduct");
 		}else if(sel == 1) {
-			mallCont.setNextMenu("AdminItemAdd");
+			mallCont.setNextMenu("AdminCategoryAdd");
 		}else if(sel == 2) {
-			mallCont.setNextMenu("AdminItemUpdate");
+			mallCont.setNextMenu("AdminCategoryUpdate");
 		}else if(sel == 3) {
-			mallCont.setNextMenu("AdminItemDelete");
+			mallCont.setNextMenu("AdminCategoryDelete");
 		}else if(sel == 4) {
-			mallCont.setNextMenu("AdminItemList");
+			mallCont.setNextMenu("AdminCategoryList");
 		}else {
 			return true;
 		}

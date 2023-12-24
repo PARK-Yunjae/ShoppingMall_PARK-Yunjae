@@ -7,13 +7,9 @@ import util.Util;
 public class _MailMain implements MenuCommand{
 	private MallController mallCont;
 	
-	public _MailMain(){
-		init();
-	}
 	@Override
 	public void init() {
 		mallCont = MallController.getInstance();
-	
 	}
 
 	@Override
@@ -26,12 +22,14 @@ public class _MailMain implements MenuCommand{
 		
 		if(sel == 0) {
 			System.out.println("프로그램 종료");
-			return false;
+			mallCont.setNextMenu("");
 		}else if(sel == 1) {
-			mallCont.setNext("MallJoin").update();
+			mallCont.setNextMenu("MallJoin");
 		}else if(sel == 2) {
-			mallCont.setNext("MallLogin").update();
+			mallCont.setNextMenu("MallLogin");
+		}else {
+			return true;
 		}
-		return true;
+		return false;
 	}
 }

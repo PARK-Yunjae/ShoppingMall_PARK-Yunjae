@@ -6,19 +6,24 @@ import java.util.Scanner;
 public class Util {
 	private static Scanner sc = new Scanner(System.in);
 
-	public static int getValue(String msg, int start, int end){
-		System.out.print(msg  +"(%d ~ %d) : ".formatted(start,end));
+	public static int getValue(String msg, int start, int end) {
+		System.out.print(msg + "(%d ~ %d) : ".formatted(start, end));
 		int sel = -1;
 		try {
-			sel = sc.nextInt();				
+			sel = sc.nextInt();
 			if (sel < start || sel > end) {
 				System.out.println(start + " ~ " + end + " 값 입력해주세요");
 				return -1;
 			}
-		}catch (InputMismatchException  e) {
+		} catch (InputMismatchException e) {
 			System.out.println("숫자를 입력해 주세요");
 		}
 		sc.nextLine();
 		return sel;
+	}
+
+	public static String getValue(String msg) {
+		System.out.print(msg + " : ");
+		return sc.next();
 	}
 }
