@@ -19,6 +19,7 @@ public class MallLogin implements MenuCommand {
 	@Override
 	public boolean update() {
 		mallCont.setNextMenu("MallMain");
+		System.out.println("===[로그인]===");
 		String id = Util.getValue("ID");
 		int idIdx = mallCont.getmDAO().idValue(id);
 		if (idIdx == -1) {

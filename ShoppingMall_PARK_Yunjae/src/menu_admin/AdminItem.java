@@ -14,6 +14,7 @@ public class AdminItem implements MenuCommand{
 
 	@Override
 	public boolean update() {
+		mallCont.setNextMenu("AdminItem");
 		System.out.println("===[ 관리자 : 아이템 관리]===");
 		System.out.println("[1] 아이템 추가");
 		System.out.println("[2] 아이템 수정");

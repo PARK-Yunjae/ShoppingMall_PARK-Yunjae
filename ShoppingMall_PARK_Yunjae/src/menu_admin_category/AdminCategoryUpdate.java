@@ -26,7 +26,7 @@ public class AdminCategoryUpdate implements MenuCommand {
 			System.out.println("[관리자] 카테고리가 존재하지 않습니다");
 			return false;
 		}
-		String newName = Util.getValue("변경할 이름 : ");
+		String newName = Util.getValue("변경할 이름");
 		// 카테고리 리스트 수정
 		mallCont.getCgDAO().UpdateCategory(cgIdx, newName); 
 		// 아이템 리스트 카테고리 이름 수정

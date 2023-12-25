@@ -1,6 +1,8 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import dto.Item;
 
@@ -48,13 +50,17 @@ public class ItemDAO {
 	}
 
 	// 아이템 목록
-	public void ItemList(String cgName) {
+	public ArrayList<Integer> ItemList(String cgName) {
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		int cnt = 0;
 		System.out.println("[" + cgName + " 목록]");
 		for (int i = 0; i < itemList.size(); i += 1) {
 			if (itemList.get(i).getCategoriName().equals(cgName)) {
-				itemList.get(i).printItem();
+				arr.add(itemList.get(i).getItemNum());
+				System.out.println("[%3d] %s".formatted(++cnt, itemList.get(i).printItem()));
 			}
 		}
+		return arr;
 	}
 
 	// 카테고리 수정
@@ -102,8 +108,9 @@ public class ItemDAO {
 		return data;
 	}
 	
-	// 텍스트파일에서 문자열 받아와서 데이터 넣기
+	// 텍스트파일에서 문자열 받아와서 데이터 넣기 - 셋에 카테고리 넣어서 전달
 	public void FileToData(String data) {
+		if(data.equals("")) return;
 		String datas[] = data.split("\n");
 		itemList.clear();
 		for(int i=0 ; i<datas.length ; i+=1) {
@@ -112,5 +119,26 @@ public class ItemDAO {
 			item = item.CreateItem(info);
 			itemList.add(item);
 		}
+	}
+	
+	// 아이템 넘버로 카테고리 이름 찾아서 반환
+	public String getCategoryName(int itemNum) {
+		String name = "";
+		for(int i=0 ; i<itemList.size() ; i+=1) {
+			if(itemList.get(i).getItemNum() == itemNum) {
+				name = itemList.get(i).toString();
+			}
+		}
+		return name;
+	}
+	
+	// 로드할떄 아이템을 넣은 후에 카테고리만 중복없이 가져오기
+	public ArrayList<String> getCategoryList(){
+		Set<String> cgList=new HashSet<String>();
+		for(int i=0 ; i<itemList.size() ; i+=1) {
+			cgList.add(itemList.get(i).getCategoriName());
+		}
+		ArrayList<String> list = new ArrayList<>(cgList);
+		return list;
 	}
 }

@@ -22,12 +22,16 @@ public class Cart {
 		return itemNum;
 	}
 
-	public int getItemCnt() {
+	public int getItemCnt() { 
 		return itemCnt;
 	}
 
-	private Cart(String cartNum, String id, String itemNum, String itemCnt) {
-		this.cartNum = Integer.parseInt(cartNum);
+	public void setItemCnt(int itemCnt) {
+		this.itemCnt = itemCnt;
+	}
+
+	private Cart(String id, String itemNum, String itemCnt) {
+		this.cartNum = num++;
 		this.id = id;
 		this.itemNum = Integer.parseInt(itemNum);
 		this.itemCnt = Integer.parseInt(itemCnt);
@@ -36,9 +40,14 @@ public class Cart {
 	public Cart  CreateCart(String[] info) {
 		if(info == null || info.length == 0) return null;
 		
-		return new Cart(info[0], info[1], info[2], info[3]);
+		return new Cart(info[0], info[1], info[2]);
 	}
 	
+	@Override
+	public String toString() {
+		return  itemCnt + " 개";
+	}
+
 	public String DataToFile() {
 		return "%d/%s/%d/%d".formatted(cartNum, id, itemNum, itemCnt);
 	}

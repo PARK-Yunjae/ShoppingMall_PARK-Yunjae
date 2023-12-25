@@ -14,6 +14,7 @@ public class AdminBoard implements MenuCommand{
 
 	@Override
 	public boolean update() {
+		mallCont.setNextMenu("AdminBoard");
 		System.out.println("===[ 관리자 : 게시판 관리 ]===");
 		System.out.println("[1] 게시글 삭제"); 
 		System.out.println("[2] 게시판 목록"); 

@@ -13,6 +13,9 @@ import menu_admin_item.*;
 import menu_admin_member.*;
 import menu_mall.*;
 import menu_member.*;
+import menu_member_board.*;
+import menu_member_cart.*;
+import menu_member_info.*;
 
 public class MallController {
 
@@ -103,9 +106,20 @@ public class MallController {
 		mallList.put("AdminMemberDelete", new AdminMemberDelete());
 		mallList.put("MemberMain", new _MemberMain());
 		mallList.put("MemberBoard", new MemberBoard());
+		mallList.put("MemberBoardBeforePage", new MemberBoardBeforePage());
+		mallList.put("MemberBoardAfterPage", new MemberBoardAfterPage());
+		mallList.put("MemberBoardAddPage", new MemberBoardAddPage());
+		mallList.put("MemberBoardViewPage", new MemberBoardViewPage());
+		mallList.put("MemberBoardUpdatePage", new MemberBoardUpdatePage());
+		mallList.put("MemberBoardDeletePage", new MemberBoardDeletePage());
+		mallList.put("MemberBoard", new MemberBoard());
 		mallList.put("MemberCart", new MemberCart());
+		mallList.put("MemberCartAllDelete", new MemberCartAllDelete());
+		mallList.put("MemberCartOneDelete", new MemberCartOneDelete());
 		mallList.put("MemberInfo", new MemberInfo());
-		mallList.put("MemberItem", new MemberItem());
+		mallList.put("MemberInfoList", new MemberInfoList());
+		mallList.put("MemberInfoNameUpdate", new MemberInfoNameUpdate());
+		mallList.put("MemberInfoPwUpdate", new MemberInfoPwUpdate());
 		mallList.put("MemberQuit", new MemberQuit());
 		mallList.put("MemberShopping", new MemberShopping());
 	}
@@ -120,6 +134,7 @@ public class MallController {
 		mc.init();
 
 		while (mc.update()) {
+			System.out.println("여기니");
 		}
 
 		if (nextMenu.equals(""))

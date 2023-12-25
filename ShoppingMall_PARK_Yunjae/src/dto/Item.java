@@ -54,10 +54,15 @@ public class Item {
 		return new Item(info[0], info[1], info[2], info[3]);
 	}
 	
-	public void printItem() {
-		System.out.println("[%d] %s".formatted(itemNum, itemName));
+	public String printItem() {
+		return "%s".formatted(itemName);
 	}
 	
+	@Override
+	public String toString() {
+		return categoryName + " " + itemName;
+	}
+
 	public String DataToFile() {
 		return "%d/%s/%s/%d".formatted(itemNum, categoryName, itemName, price); 
 	}

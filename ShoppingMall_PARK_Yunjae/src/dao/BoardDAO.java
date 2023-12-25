@@ -68,6 +68,7 @@ public class BoardDAO {
 
 	// 게시판 출력
 	public void PrintBoard() {
+		System.out.println("[%d/%d]".formatted(curPageNum, pageCount));
 		for (int i = startRow; i < endRow; i += 1) {
 			bList.get(i).PrintBoard();
 		}
@@ -91,6 +92,7 @@ public class BoardDAO {
 	
 	// 텍스트파일에서 문자열 받아와서 데이터 넣기
 	public void FileToData(String data) {
+		if(data.equals("")) return;
 		String datas[] = data.split("\n");
 		bList.clear();
 		for(int i=0 ; i<datas.length ; i+=1) {
@@ -99,5 +101,29 @@ public class BoardDAO {
 			b = b.CreateBoard(info);
 			bList.add(b);
 		}
+	}
+	
+	// 게시글을 선택 했을때 내글이면 방번호 반환
+	public int getMyBoardIdx(int idx, String id) {
+		if(bList.get(idx).getId().equals(id)) {
+			return idx;
+		}
+		return -1;
+	}
+	
+	// 게시글을 선택했을때 내용 보여주기
+	public void BoardViewPage(int idx) {
+		bList.get(idx).ViewPage();
+	}
+	
+	// 내가 게시판에 쓴 글 개수
+	public void MyBoardNum(String id) {
+		int cnt = 0;
+		for (int i = 0; i < bList.size(); i += 1) {
+			if (bList.get(i).getId().equals(id)) {
+				cnt++;
+			}
+		}
+		System.out.println("게시글 수 : %d개".formatted(cnt));
 	}
 }

@@ -79,6 +79,7 @@ public class MemberDAO {
 	
 	// 텍스트파일에서 문자열 받아와서 데이터 넣기
 	public void FileToData(String data) {
+		if(data.equals("")) return;
 		String datas[] = data.split("\n");
 		mList.clear();
 		for(int i=0 ; i<datas.length ; i+=1) {

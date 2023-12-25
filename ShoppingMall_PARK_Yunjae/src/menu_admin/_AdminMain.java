@@ -14,6 +14,7 @@ public class _AdminMain implements MenuCommand{
 
 	@Override
 	public boolean update() {
+		mallCont.setNextMenu("AdminMain");
 		System.out.println("===[ 관리자 ]===");
 		System.out.println("[1] 회원관리"); 
 		System.out.println("[2] 상품관리"); 

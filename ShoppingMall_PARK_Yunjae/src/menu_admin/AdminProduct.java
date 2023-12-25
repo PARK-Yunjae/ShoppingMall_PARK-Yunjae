@@ -14,6 +14,7 @@ public class AdminProduct implements MenuCommand{
 
 	@Override
 	public boolean update() {
+		mallCont.setNextMenu("AdminProduct");
 		System.out.println("===[ 관리자 : 상품 관리]===");
 		System.out.println("[1] 카테고리 관리");
 		System.out.println("[2] 아이템 관리");

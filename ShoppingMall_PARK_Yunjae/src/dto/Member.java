@@ -25,6 +25,10 @@ public class Member {
 		return pw;
 	}
 
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
+
 	public String getMemberName() {
 		return memberName;
 	}

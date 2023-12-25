@@ -13,7 +13,8 @@ public class AdminCategori implements MenuCommand{
 	}
 
 	@Override
-	public boolean update() {
+	public boolean update() {	
+		mallCont.setNextMenu("AdminCategori");
 		System.out.println("===[ 관리자 : 카테고리 관리]===");
 		System.out.println("[1] 카테고리 추가");
 		System.out.println("[2] 카테고리 수정");

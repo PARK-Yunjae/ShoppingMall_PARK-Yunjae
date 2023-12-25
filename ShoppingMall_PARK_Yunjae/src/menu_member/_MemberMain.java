@@ -14,11 +14,13 @@ public class _MemberMain implements MenuCommand {
 
 	@Override
 	public boolean update() {
+		mallCont.setNextMenu("MemberMain");
+		System.out.println("===[ %s ]===".formatted(mallCont.getId()));
 		System.out.println("[1] 상품구매");
 		System.out.println("[2] 장바구니");
 		System.out.println("[3] 게시판");
-		System.out.println("[2] 나의정보");
-		System.out.println("[3] 회원탈퇴");
+		System.out.println("[4] 나의정보");
+		System.out.println("[5] 회원탈퇴");
 		System.out.println("[0] 로그아웃");
 		int sel = Util.getValue("메뉴 입력", 0, 5);
 

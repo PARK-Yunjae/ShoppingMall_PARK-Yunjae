@@ -2,7 +2,6 @@ package menu_admin_member;
 
 import _mall.MenuCommand;
 import controller.MallController;
-import dao.FileDAO;
 import util.Util;
 
 public class AdminMemberDelete implements MenuCommand {
