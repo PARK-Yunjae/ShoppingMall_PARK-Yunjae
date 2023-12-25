@@ -134,7 +134,6 @@ public class MallController {
 		mc.init();
 
 		while (mc.update()) {
-			System.out.println("여기니");
 		}
 
 		if (nextMenu.equals(""))

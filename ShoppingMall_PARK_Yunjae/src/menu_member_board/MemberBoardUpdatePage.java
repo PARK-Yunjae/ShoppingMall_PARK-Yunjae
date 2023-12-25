@@ -16,14 +16,19 @@ public class MemberBoardUpdatePage implements MenuCommand {
 	@Override
 	public boolean update() {
 		mallCont.setNextMenu("MemberBoard");
-		System.out.println("===[%d 글 수정]===".formatted(mallCont.getId()));
+		if(mallCont.getbDAO().getbList().size() == 0) {
+			System.out.println("[%s] 게시글이 존재하지 않습니다".formatted(mallCont.getId()));
+			return false;
+		}
+		System.out.println("===[%s 글 수정]===".formatted(mallCont.getId()));
 		int startRow = mallCont.getbDAO().getStartRow();
 		int endRow = mallCont.getbDAO().getEndRow();
-		int idx = Util.getValue("선택", startRow , endRow);
+		int idx = Util.getValue("선택", startRow+1 , endRow);
 		if(idx == -1) {
 			System.out.println("[%s] 해당 페이지 글만 선택 가능합니다");
 			return false;
 		}
+		idx -= 1;
 		idx = mallCont.getbDAO().getMyBoardIdx(idx, mallCont.getId());
 		if(idx == -1) {
 			System.out.println("[%s] 내가 작성한 글이 아닙니다");

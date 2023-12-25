@@ -58,8 +58,10 @@ public class BoardDAO {
 	public void PageCalculate() {
 		count = bList.size();
 		pageCount = count / pageSize;
-		if (count % pageSize > 0)
+		if (count % pageSize > 0) {
 			pageCount += 1;
+		}
+		pageCount = pageCount == 0 ? 1: pageCount;
 		startRow = (curPageNum - 1) * pageSize;
 		endRow = startRow + pageSize;
 		if (endRow > count)

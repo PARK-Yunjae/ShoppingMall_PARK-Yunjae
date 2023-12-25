@@ -44,10 +44,11 @@ public class AdminBoardDelete implements MenuCommand{
 			}else if(sel == 3) {
 				int startRow = mallCont.getbDAO().getStartRow();
 				int endRow = mallCont.getbDAO().getEndRow();
-				int bIdx = Util.getValue("게시글 선택", startRow, endRow);
+				int bIdx = Util.getValue("게시글 선택", startRow+1, endRow);
 				if(bIdx == -1) {
 					continue;
 				}
+				bIdx -= 1;
 				String title = mallCont.getbDAO().getbList().get(bIdx).getTitle();
 				System.out.println("[관리자] %s 게시글 삭제 완료".formatted(title));
 				mallCont.getbDAO().DedeteBoard(bIdx);
