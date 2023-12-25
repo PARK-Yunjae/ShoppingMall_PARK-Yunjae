@@ -33,15 +33,13 @@ public class Cart {
 		this.itemCnt = Integer.parseInt(itemCnt);
 	}
 	
-	public Cart(String id, int itemNum) {
-		this.cartNum  = ++num;
-		this.id = id;
-		this.itemNum = itemNum;
-	}
-	
 	public Cart  CreateCart(String[] info) {
 		if(info == null || info.length == 0) return null;
 		
 		return new Cart(info[0], info[1], info[2], info[3]);
+	}
+	
+	public String DataToFile() {
+		return "%d/%s/%d/%d".formatted(cartNum, id, itemNum, itemCnt);
 	}
 }

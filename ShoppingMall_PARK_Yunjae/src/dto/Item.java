@@ -3,7 +3,7 @@ package dto;
 public class Item {
 	private static int num;
 	private int itemNum;
-	private String categoriName;
+	private String categoryName;
 	private String itemName;
 	private int price;
 	
@@ -15,11 +15,19 @@ public class Item {
 	}
 
 	public String getCategoriName() {
-		return categoriName;
+		return categoryName;
+	}
+
+	public void setCategoriName(String categoriName) {
+		this.categoryName = categoriName;
 	}
 
 	public String getItemName() {
 		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
 
 	public int getPrice() {
@@ -28,15 +36,14 @@ public class Item {
 
 	public Item( String categoriName, String itemName, String price) {
 		this.itemNum = ++num;
-		this.categoriName = categoriName;
+		this.categoryName = categoriName;
 		this.itemName = itemName;
 		this.price = Integer.parseInt(price);
 	}
 	
-	private Item(String itemNum, String categoriName, String itemName, String price) {
-		super();
+	private Item(String itemNum, String categoryName, String itemName, String price) {
 		this.itemNum = Integer.parseInt(itemNum);
-		this.categoriName = categoriName;
+		this.categoryName = categoryName;
 		this.itemName = itemName;
 		this.price = Integer.parseInt(price);
 	}
@@ -45,5 +52,13 @@ public class Item {
 		if(info == null || info.length == 0) return null;
 		
 		return new Item(info[0], info[1], info[2], info[3]);
+	}
+	
+	public void printItem() {
+		System.out.println("[%d] %s".formatted(itemNum, itemName));
+	}
+	
+	public String DataToFile() {
+		return "%d/%s/%s/%d".formatted(itemNum, categoryName, itemName, price); 
 	}
 }

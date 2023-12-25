@@ -29,13 +29,6 @@ public class Member {
 		return memberName;
 	}
 
-	public Member(String id, String pw, String memberName) {
-		super();
-		this.id = id;
-		this.pw = pw;
-		this.memberName = memberName;
-	}
-
 	private Member(String number, String id, String pw, String memberName) {
 		this.memberNum = Integer.parseInt(number);
 		this.id = id;
@@ -53,5 +46,9 @@ public class Member {
 			return null;
 
 		return new Member(info[0], info[1], info[2], info[3]);
+	}
+	
+	public String DataToFile() {
+		return "%d/%s/%s/%s".formatted(memberNum, id, pw, memberName);
 	}
 }

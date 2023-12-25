@@ -13,6 +13,10 @@ public class CategoryDAO {
 		return cgList;
 	}
 
+	public String getCategoryName(int cgIdx) {
+		return cgList.get(cgIdx);
+	}
+
 	// 카테고리 중복
 	public int nameValue(String name) {
 		for (int i = 0; i < cgList.size(); i += 1) {
@@ -28,6 +32,11 @@ public class CategoryDAO {
 		cgList.add(name);
 	}
 
+	// 카테고리 수정
+	public void UpdateCategory(int idx, String name) {
+		cgList.set(idx, name);
+	}
+
 	// 카테고리 삭제
 	public void DeleteCategory(int cgIdx) {
 		cgList.remove(cgIdx);
@@ -37,15 +46,11 @@ public class CategoryDAO {
 	public void CategoryList() {
 		if (cgList.size() == 0) {
 			System.out.println("[관리자] 카테고리가 존재하지 않습니다");
-			return; 
+			return;
 		}
 		System.out.println("[카테고리 목록]");
 		for (int i = 0; i < cgList.size(); i += 1) {
 			System.out.println("[" + (i + 1) + "]" + cgList.get(i));
 		}
-	}
-	
-	public String getCategoryName(int cgIdx) {
-		return cgList.get(cgIdx);
 	}
 }

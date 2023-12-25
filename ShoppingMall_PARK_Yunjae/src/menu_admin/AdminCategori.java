@@ -4,7 +4,7 @@ import _mall.MenuCommand;
 import controller.MallController;
 import util.Util;
 
-public class AdminCategory implements MenuCommand{
+public class AdminCategori implements MenuCommand{
 	private MallController mallCont;
 
 	@Override

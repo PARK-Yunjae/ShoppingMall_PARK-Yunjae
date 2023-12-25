@@ -10,7 +10,6 @@ public class Board {
 	private int hits;
 	
 	public Board() {
-		num = 1;
 	}
 
 	public int getBoardNum() {
@@ -38,19 +37,26 @@ public class Board {
 	}
 
 	private Board(String boardNum, String title, String id, String date, String contents, String hits) {
-		super();
 		this.boardNum = Integer.parseInt(boardNum);
 		this.title = title;
 		this.id = id;
 		this.date = date;
 		this.contents = contents;
 		this.hits = Integer.parseInt(hits);
-		num++;
+		++num;
 	}
 	
 	public Board CreateBoard(String[] info) {
 		if(info == null || info.length == 0) return null;
 		
 		return new Board(info[0], info[1], info[2], info[3], info[4], info[5]);
+	}
+	
+	public void PrintBoard() {
+		System.out.println("[%3d]%s".formatted(boardNum, title));
+	}
+	
+	public String DataToFile() {
+		return "%d/%s/%s/%s/%s/%d".formatted(boardNum, title, id, date, contents, hits);
 	}
 }

@@ -18,7 +18,7 @@ public class AdminMember implements MenuCommand {
 		System.out.println("[1] 회원 목록");
 		System.out.println("[2] 회원 수정");
 		System.out.println("[3] 회원 삭제");
-		System.out.println("[0] 로그 아웃");
+		System.out.println("[0] 뒤로 가기");
 		int sel = Util.getValue("메뉴 입력", 0, 3);
 		
 		if(sel == 0) {
