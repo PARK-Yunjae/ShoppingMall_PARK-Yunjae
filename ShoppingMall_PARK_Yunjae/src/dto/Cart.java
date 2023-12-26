@@ -30,8 +30,15 @@ public class Cart {
 		this.itemCnt = itemCnt;
 	}
 
-	private Cart(String id, String itemNum, String itemCnt) {
+	public Cart(String id, String itemNum, String itemCnt) {
 		this.cartNum = num++;
+		this.id = id;
+		this.itemNum = Integer.parseInt(itemNum);
+		this.itemCnt = Integer.parseInt(itemCnt);
+	}	
+	
+	private Cart(String cartNum, String id, String itemNum, String itemCnt) {
+		this.cartNum = Integer.parseInt(cartNum);
 		this.id = id;
 		this.itemNum = Integer.parseInt(itemNum);
 		this.itemCnt = Integer.parseInt(itemCnt);
@@ -40,7 +47,7 @@ public class Cart {
 	public Cart  CreateCart(String[] info) {
 		if(info == null || info.length == 0) return null;
 		
-		return new Cart(info[0], info[1], info[2]);
+		return new Cart(info[0], info[1], info[2], info[3]);
 	}
 	
 	@Override

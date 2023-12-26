@@ -10,7 +10,7 @@ public class AdminFileSave implements MenuCommand{
 	public void init() {
 		mallCont = MallController.getInstance();
 	}
-
+ 
 	@Override
 	public boolean update() {
 		mallCont.setNextMenu("AdminMain");
