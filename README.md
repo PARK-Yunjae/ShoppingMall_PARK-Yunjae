@@ -24,8 +24,8 @@
 	  
 	[1]회원 목록	AdminMemberList
 	[2]회원 삭제 	AdminMemberDelete
-	[3]뒤로가기	 	AdminMain
-	[0] 종료		""
+	[3]뒤로가기	AdminMain
+	[0] 종료	""
 
 	전체 회원 목록 num, id, pw, name
 	회원 삭제 시 구매목록 삭제 안내문구 , 게시글을 남겨둔다 
@@ -37,7 +37,7 @@
 	[2] 아이템 삭제	AdminItemDelete
 	[3] 총 매출 	AdminRevenue
 	[4] 뒤로 가기	AdminMain
-	[0] 종료		""
+	[0] 종료	""
 
 	가격 표시
 	아이템 삭제 시 구매목록도 삭제
@@ -81,7 +81,7 @@
 	[1] 쇼핑하기 	MemberCartBuy
 	[2] 비우기	MemberCartClear
 	[3] 뒤로가기 	MemberMain
-	[0] 종료		""
+	[0] 종료	""
 
 	현재 로그인중인 유저의 카트 목록 출력(아이템, 가격, 개수, 총 가격)
 	쇼핑하기는 개수 각각 가격 총 개수 총 가격 띄워줌
@@ -93,7 +93,7 @@
 	[2] 게시글 추가 	MemberBoardAdd
 	[3] 게시글 삭제	MemberBoardDelete
 	[4] 뒤로가기 	MemberMain
-	[0] 종료		""
+	[0] 종료	""
 
 	글쓰기 작성 시 날짜 받아오기 (LocalDate)
 	게시글을 볼 때마다 조회수 1 증가
@@ -106,21 +106,21 @@
 	[2] 이후 	MemberBoardAfter
 	[3] 게시글보기	MemberBoardViewPage
 	[4] 뒤로가기	MemberBoard
-	[0] 종료		""
+	[0] 종료	""
 
 	게시글 목록 선택 시   첫줄 제목 작성자 날짜 조회수, 두번쨰줄 내용
 	본인 게시글만 삭제 가능
 	내 게시글 선택 시 
 
-	[1] 삭제		MemberBoardMyPageDelete
+	[1] 삭제	MemberBoardMyPageDelete
 	[2] 뒤로가기	MemberBoardList
-	[0] 종료		""
+	[0] 종료	""
 
 >4. 나의 정보 : MemberInfo
 
 	[1] 비밀번호변경 MemberInfoPwUpdate
 	[2] 뒤로가기 	MemberMain
-	[3] 종료		""
+	[3] 종료	""
 	
  	member 정보 출력
 	비밀번호 변경 시 다시 비밀번호를 입력 받아야 변경 가능
