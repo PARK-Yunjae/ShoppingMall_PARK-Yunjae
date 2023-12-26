@@ -10,6 +10,9 @@ public class _MailMain implements MenuCommand{
 	@Override
 	public void init() {
 		mallCont = MallController.getInstance();
+		if(mallCont.getmDAO().getmList().size() == 0) {
+			mallCont.getmDAO().AdminJoin();
+		}
 	}
 
 	@Override
@@ -22,6 +25,8 @@ public class _MailMain implements MenuCommand{
 		
 		if(sel == 0) {
 			System.out.println("프로그램 종료");
+			mallCont.setNextMenu("AdminFileSave");
+			mallCont.changeMenu();
 			mallCont.setNextMenu("");
 		}else if(sel == 1) {
 			mallCont.setNextMenu("MallJoin");

@@ -14,6 +14,10 @@ public class MemberDAO {
 
 	public MemberDAO() { // 처음 DAO 를 만들때 관리자 생성
 		mList = new ArrayList<Member>();
+		AdminJoin();
+	}
+	
+	public void AdminJoin() {
 		String[] info = { "" + (memberNum++), "admin", "admin", "관리자" };
 		mList.add(Member.CreateMember(info));
 	}

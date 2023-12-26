@@ -57,7 +57,7 @@ public class ItemDAO {
 		for (int i = 0; i < itemList.size(); i += 1) {
 			if (itemList.get(i).getCategoriName().equals(cgName)) {
 				arr.add(itemList.get(i).getItemNum());
-				System.out.println("[%3d] %s".formatted(++cnt, itemList.get(i).printItem()));
+				System.out.println("[%d] %s".formatted(++cnt, itemList.get(i).printItem()));
 			}
 		}
 		return arr;

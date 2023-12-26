@@ -24,13 +24,13 @@ public class MemberBoardDeletePage implements MenuCommand {
 		int endRow = mallCont.getbDAO().getEndRow();
 		int idx = Util.getValue("선택", startRow+1 , endRow);
 		if(idx == -1) {
-			System.out.println("[%s] 해당 페이지 글만 선택 가능합니다");
+			System.out.println("[%s] 해당 페이지 글만 선택 가능합니다".formatted(mallCont.getId()));
 			return false;
 		}
 		idx -= 1;
 		idx = mallCont.getbDAO().getMyBoardIdx(idx, mallCont.getId());
 		if(idx == -1) {
-			System.out.println("[%s] 내가 작성한 글이 아닙니다");
+			System.out.println("[%s] 내가 작성한 글이 아닙니다".formatted(mallCont.getId()));
 			return false;
 		}
 		int boardNum = mallCont.getbDAO().getbList().get(idx).getBoardNum();

@@ -35,7 +35,7 @@ public class MemberShopping implements MenuCommand{
 		ArrayList<Integer> cgToItemList = mallCont.getiDAO().ItemList(cgName); 
 		int itemSel = Util.getValue("선택", 1, cgToItemList.size())-1;
 		if(itemSel == -2) {
-			System.out.println("[%s] 아이템 이름이 존재합니다".formatted(mallCont.getId()));
+			System.out.println("[%s] 선택오류 메인화면으로 갑니다".formatted(mallCont.getId()));
 			return false;
 		}
 		

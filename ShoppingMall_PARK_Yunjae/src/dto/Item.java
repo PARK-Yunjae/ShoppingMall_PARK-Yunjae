@@ -60,7 +60,7 @@ public class Item {
 	
 	@Override
 	public String toString() {
-		return categoryName + " " + itemName;
+		return categoryName + " " + itemName + " ";
 	}
 
 	public String DataToFile() {

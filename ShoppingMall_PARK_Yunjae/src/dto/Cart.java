@@ -45,7 +45,7 @@ public class Cart {
 	
 	@Override
 	public String toString() {
-		return  itemCnt + " 개";
+		return  itemCnt + "개";
 	}
 
 	public String DataToFile() {

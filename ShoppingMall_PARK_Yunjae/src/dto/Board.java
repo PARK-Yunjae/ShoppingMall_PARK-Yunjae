@@ -67,7 +67,7 @@ public class Board {
 	}
 	
 	public void PrintBoard() {
-		System.out.println("[%3d]%s".formatted(boardNum, title));
+		System.out.println("[%d]%s".formatted(boardNum, title));
 	}
 	
 	public String DataToFile() {

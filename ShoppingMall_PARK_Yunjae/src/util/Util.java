@@ -21,9 +21,14 @@ public class Util {
 		sc.nextLine();
 		return sel;
 	}
-
+	// 띄어쓰기 비허용
 	public static String getValue(String msg) {
 		System.out.print(msg + " : ");
 		return sc.next();
+	}
+	// 띄어쓰기 허용
+	public static String strValue(String msg) {
+		System.out.print(msg + " : ");
+		return sc.nextLine();
 	}
 }
