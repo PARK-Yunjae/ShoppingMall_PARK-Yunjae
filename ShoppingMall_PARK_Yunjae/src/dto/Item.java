@@ -10,6 +10,10 @@ public class Item {
 	public Item() {
 	}
 	
+	public static void setNum(int num) {
+		Item.num = num;
+	}
+
 	public int getItemNum() {
 		return itemNum;
 	}

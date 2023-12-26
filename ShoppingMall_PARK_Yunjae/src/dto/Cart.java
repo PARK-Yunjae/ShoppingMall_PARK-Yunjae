@@ -10,6 +10,10 @@ public class Cart {
 	public Cart() {
 	}
 	
+	public static void setNum(int num) {
+		Cart.num = num;
+	}
+
 	public int getCartNum() {
 		return cartNum;
 	}

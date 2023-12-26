@@ -14,6 +14,12 @@ public class Board {
 	public Board() {
 	}
 
+	
+	public static void setNum(int num) {
+		Board.num = num;
+	}
+
+
 	public int getBoardNum() {
 		return boardNum;
 	}

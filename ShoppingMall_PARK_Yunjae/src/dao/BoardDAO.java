@@ -74,6 +74,7 @@ public class BoardDAO {
 		for (int i = startRow; i < endRow; i += 1) {
 			bList.get(i).PrintBoard();
 		}
+		System.out.println("==========");
 	}
 	
 	// 게시글 하나 삭제
@@ -97,12 +98,17 @@ public class BoardDAO {
 		if(data.equals("")) return;
 		String datas[] = data.split("\n");
 		bList.clear();
+		int maxBoardNum = 0;
 		for(int i=0 ; i<datas.length ; i+=1) {
 			Board b = new Board();
 			String[] info = datas[i].split("/");
 			b = b.CreateBoard(info);
 			bList.add(b);
+			if(maxBoardNum < Integer.parseInt(info[0])) {
+				maxBoardNum = Integer.parseInt(info[0]);
+			}
 		}
+		Board.setNum(maxBoardNum);
 	}
 	
 	// 게시글을 선택 했을때 내글이면 방번호 반환

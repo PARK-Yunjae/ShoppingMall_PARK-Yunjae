@@ -113,12 +113,17 @@ public class ItemDAO {
 		if(data.equals("")) return;
 		String datas[] = data.split("\n");
 		itemList.clear();
+		int maxItemNum = 0;
 		for(int i=0 ; i<datas.length ; i+=1) {
 			Item item = new Item();
 			String[] info = datas[i].split("/");
 			item = item.CreateItem(info);
 			itemList.add(item);
+			if(maxItemNum < Integer.parseInt(info[0])) {
+				maxItemNum = Integer.parseInt(info[0]);
+			}
 		}
+		Item.setNum(maxItemNum);
 	}
 	
 	// 아이템 넘버로 카테고리 이름 찾아서 반환

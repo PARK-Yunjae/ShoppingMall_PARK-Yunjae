@@ -18,7 +18,8 @@ public class MemberDAO {
 	}
 	
 	public void AdminJoin() {
-		String[] info = { "" + (memberNum++), "admin", "admin", "관리자" };
+		Member.setNum(1001);
+		String[] info = { 1000+"", "admin", "admin", "관리자" };
 		mList.add(Member.CreateMember(info));
 	}
 
@@ -85,10 +86,15 @@ public class MemberDAO {
 	public void FileToData(String data) {
 		if(data.equals("")) return;
 		String datas[] = data.split("\n");
+		int maxMemberNum = 0;
 		mList.clear();
 		for(int i=0 ; i<datas.length ; i+=1) {
 			String[] info = datas[i].split("/");
 			mList.add(Member.CreateMember(info));
+			if(maxMemberNum < Integer.parseInt(info[0])) {
+				maxMemberNum = Integer.parseInt(info[0]);
+			}
 		}
+		Member.setNum(maxMemberNum);
 	}
 }

@@ -75,12 +75,17 @@ public class CartDAO {
 		if(data.equals("")) return;
 		String datas[] = data.split("\n");
 		cList.clear();
+		int maxCartNum = 0;
 		for (int i = 0; i < datas.length; i += 1) {
 			Cart c = new Cart();
 			String[] info = datas[i].split("/");
 			c = c.CreateCart(info);
 			cList.add(c);
+			if(maxCartNum < Integer.parseInt(info[0])) {
+				maxCartNum = Integer.parseInt(info[0]);
+			}
 		}
+		Cart.setNum(maxCartNum);
 	}
 
 	// id하고 itemNum 받아서 일치하는 값 내보내기

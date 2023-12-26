@@ -1,12 +1,17 @@
 package dto;
 
 public class Member {
+	private static int num;
 	private int memberNum;
 	private String id;
 	private String pw;
 	private String memberName;
 
 	public Member() {
+	}
+
+	public static void setNum(int num) {
+		Member.num = num;
 	}
 
 	public int getMemberNum() {
@@ -31,6 +36,13 @@ public class Member {
 
 	public String getMemberName() {
 		return memberName;
+	}
+	
+	public Member(String id, String pw, String memberName) {
+		this.memberNum = num++;
+		this.id = id;
+		this.pw = pw;
+		this.memberName = memberName;
 	}
 
 	private Member(String number, String id, String pw, String memberName) {
