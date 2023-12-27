@@ -94,7 +94,7 @@
 >3. 게시판 : MemberBoard
 
 	[1] 게시글 목록 	BoardList
-	[2] 게시글 추가 	BoardAdd
+	[2] 게시글 추가 	BoardAddPage
 	[3] 게시글 삭제	BoardDelete
 	[4] 뒤로가기 	MemberMain
 	[0] 종료	""
