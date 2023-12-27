@@ -1,41 +1,83 @@
 package dao;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-
-import files.AdminFileLoad;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class FileDAO {
-	String CUR_PATH = System.getProperty("user.dir") + "//src//" + AdminFileLoad.class.getPackageName() + "//";
+	private String txtPath = "src/files/";
+	private Charset charSet = StandardCharsets.UTF_8;
+	// 이넘?
+	enum FileName {
+		BOARD("board.txt"), 
+		MEMBER("member.txt"), 
+		ITEM("item.txt"), 
+		CART("cart.txt");
 
-	public void FileSave(String fileName, String data) {
-		try (FileWriter fw = new FileWriter(CUR_PATH + fileName)) {
-			fw.write(data);
-			System.out.println(fileName + " 저장 성공");
-		} catch (Exception e) {
-			System.out.println(fileName + " 저장 실패");
+		private String name;
+
+		FileName(String name) {
+			this.name = name;
+		}
+
+		public String getName() {
+			return name;
 		}
 	}
 
-	public String FileLoad(String fileName) {
-		String data = "";
-		try (FileReader fr = new FileReader(CUR_PATH + fileName); 
-			BufferedReader br = new BufferedReader(fr)) {
-			while(true) {
-				String line = br.readLine();
-				if(line == null) {
-					break;
-				}
-				data += line + "\n";
-			}
-			if(data.length() != 0) {
-				data = data.substring(0, data.length()-1);
-			}
-			System.out.println(fileName + " 로드 성공");
-		} catch (Exception e) {
-			System.out.println(fileName + " 로드 실패");
+	public FileDAO() {
+		init();
+	}
+
+	private static FileDAO instance = new FileDAO();
+
+	static public FileDAO getInstance() {
+		return instance;
+	}
+
+	// 텍스트 파일이 없으면 만들기
+	private static void createFile(FileName name) {
+		Path path = Paths.get("src/files/" + name.getName());
+		try {
+			Files.createFile(path);
+		} catch (IOException e) {
+			// System.out.println("파일이 이미 있음");
 		}
-		return data;
+	}
+
+	// 메인 실행할떄 컨트롤러 안에서 불러오면 파일 로드함
+	private void init() { 
+
+		createFile(FileName.BOARD);
+		createFile(FileName.MEMBER);
+		createFile(FileName.ITEM);
+		createFile(FileName.CART);
+
+		try {
+			List<String> bData = FileLoad(FileName.BOARD);
+			BoardDAO.FileToData(bData);
+			List<String> mData = FileLoad(FileName.MEMBER);
+			MemberDAO.FileToData(mData);
+			List<String> iData = FileLoad(FileName.ITEM);
+			ItemDAO.FileToData(iData);
+			List<String> cData = FileLoad(FileName.CART);
+			CartDAO.FileToData(cData);
+		} catch (IOException e) { 
+			e.printStackTrace();
+		}
+	}
+
+	// 이걸로 파일 전체 불러올 수 있음
+	private List<String> FileLoad(FileName name) throws IOException {
+		return Files.readAllLines(Paths.get(txtPath + name.getName()));
+	}
+	
+	// 한줄 저장은 좋은 것인가?
+	public void FileSave(String txtName, String data) throws IOException {
+		Files.writeString(Paths.get(txtPath + txtName), data, charSet);
 	}
 }

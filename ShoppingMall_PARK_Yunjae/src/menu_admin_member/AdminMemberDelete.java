@@ -2,25 +2,30 @@ package menu_admin_member;
 
 import _mall.MenuCommand;
 import controller.MallController;
+import dao.CartDAO;
+import dao.MemberDAO;
 import util.Util;
 
 public class AdminMemberDelete implements MenuCommand {
-	private MallController mallCont;
+	private MallController cont;
 
 	@Override
 	public void init() {
-		mallCont = MallController.getInstance();
+		cont = MallController.getInstance();
 	}
 
 	@Override
 	public boolean update() {
-		mallCont.setNextMenu("AdminMember");
-		if(mallCont.getmDAO().getmList().size() == 0) {
+		MemberDAO mDAO = MemberDAO.getInstance();
+		CartDAO cDAO = CartDAO.getInstance();
+		
+		cont.setNext("AdminMember");
+		if(mDAO.getmList().size() == 0) {
 			System.out.println("[관리자] 회원이 존재하지 않습니다");
 			return false;
 		}
-		String id = Util.getValue("ID");
-		int idIdx = mallCont.getmDAO().idValue(id);
+		String id = Util.getValue("ID : ");
+		int idIdx = mDAO.idValue(id);
 		if (idIdx == -1) {
 			System.out.println("[관리자] ID가 존재하지 않습니다");
 			return false;
@@ -30,11 +35,9 @@ public class AdminMemberDelete implements MenuCommand {
 			return false;
 		}
 		// 맴버리스트에서 id 삭제
-		mallCont.getmDAO().DeleteMember(idIdx);	
+		mDAO.MemberDelete(idIdx);	
 		// 카트에서도 id와 일치하는 값 삭제
-		mallCont.getcDAO().DeleteMember(id);	
-		// 게시판 글도 삭제
-		mallCont.getbDAO().DeleteMember(id);	
+		cDAO.MemberDelete(id);	
 		System.out.println("[관리자] %s 회원 삭제 완료".formatted(id));
 		return false;
 	}

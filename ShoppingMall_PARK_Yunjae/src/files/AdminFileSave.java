@@ -1,29 +1,37 @@
 package files;
 
+import java.io.IOException;
+
 import _mall.MenuCommand;
 import controller.MallController;
+import dao.BoardDAO;
+import dao.CartDAO;
+import dao.FileDAO;
+import dao.ItemDAO;
+import dao.MemberDAO;
 
 public class AdminFileSave implements MenuCommand{
-	private MallController mallCont;
-
+	private MallController cont;
+	
 	@Override
 	public void init() {
-		mallCont = MallController.getInstance();
+		cont = MallController.getInstance();
 	}
- 
+
 	@Override
 	public boolean update() {
-		mallCont.setNextMenu("AdminMain");
-		
-		String bData = mallCont.getbDAO().DataToFile();
-		mallCont.getfDAO().FileSave("board.txt", bData);
-		String cData = mallCont.getcDAO().DataToFile();
-		mallCont.getfDAO().FileSave("cart.txt", cData);
-		String iData = mallCont.getiDAO().DataToFile();
-		mallCont.getfDAO().FileSave("item.txt", iData);
-		String mData = mallCont.getmDAO().DataToFile();
-		mallCont.getfDAO().FileSave("member.txt", mData);
-		
+		FileDAO fDAO = FileDAO.getInstance();
+		cont.setNext("AdminMain");
+		try {
+			fDAO.FileSave("board.txt", BoardDAO.DataToFile());
+			fDAO.FileSave("cart.txt", CartDAO.DataToFile());
+			fDAO.FileSave("item.txt", ItemDAO.DataToFile());
+			fDAO.FileSave("member.txt", MemberDAO.DataToFile());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("저장완료");
 		return false;
 	}
+
 }

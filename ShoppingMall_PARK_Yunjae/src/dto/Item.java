@@ -6,10 +6,10 @@ public class Item {
 	private String categoryName;
 	private String itemName;
 	private int price;
-	
+
 	public Item() {
 	}
-	
+
 	public static void setNum(int num) {
 		Item.num = num;
 	}
@@ -18,12 +18,12 @@ public class Item {
 		return itemNum;
 	}
 
-	public String getCategoriName() {
+	public String getCategoryName() {
 		return categoryName;
 	}
 
-	public void setCategoriName(String categoriName) {
-		this.categoryName = categoriName;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	public String getItemName() {
@@ -38,36 +38,38 @@ public class Item {
 		return price;
 	}
 
-	public Item( String categoriName, String itemName, String price) {
+	public Item(String categoryName, String itemName, String price) {
 		this.itemNum = ++num;
-		this.categoryName = categoriName;
+		this.categoryName = categoryName;
 		this.itemName = itemName;
 		this.price = Integer.parseInt(price);
 	}
-	
+
 	private Item(String itemNum, String categoryName, String itemName, String price) {
 		this.itemNum = Integer.parseInt(itemNum);
 		this.categoryName = categoryName;
 		this.itemName = itemName;
 		this.price = Integer.parseInt(price);
 	}
-	
+
 	public Item CreateItem(String[] info) {
-		if(info == null || info.length == 0) return null;
-		
+		if (info == null || info.length == 0)
+			return null;
+
 		return new Item(info[0], info[1], info[2], info[3]);
 	}
-	
+
 	public String printItem() {
 		return "%s".formatted(itemName);
 	}
-	
+
 	@Override
 	public String toString() {
-		return categoryName + " " + itemName + " ";
+		return "[%d]\t[%s]\t[%s]\t[%d원]".formatted(itemNum, categoryName, itemName, price);
 	}
 
 	public String DataToFile() {
-		return "%d/%s/%s/%d".formatted(itemNum, categoryName, itemName, price); 
+		return "%d/%s/%s/%d".formatted(itemNum, categoryName, itemName, price);
 	}
+	
 }

@@ -1,7 +1,7 @@
 package dto;
 
 public class Member {
-	private static int num;
+	private static int num = 1000;
 	private int memberNum;
 	private String id;
 	private String pw;
@@ -54,7 +54,7 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return memberNum + "\t" + id + "\t" + pw + "\t" + memberName;
+		return "[%d] [%s] [%s] [%s]".formatted(memberNum, id, pw, memberName);
 	}
 
 	public static Member CreateMember(String[] info) {

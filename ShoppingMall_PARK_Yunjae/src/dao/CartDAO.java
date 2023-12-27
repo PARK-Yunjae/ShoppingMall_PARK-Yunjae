@@ -1,17 +1,21 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import controller.MallController;
 import dto.Cart;
+import dto.Item;
 
 public class CartDAO {
-	private ArrayList<Cart> cList;
-	private MallController mallCont;
+	private static CartDAO instance = new CartDAO();
+	private static ArrayList<Cart> cList;
 
 	public CartDAO() {
-		mallCont = MallController.getInstance();
 		cList = new ArrayList<Cart>();
+	}
+
+	public static CartDAO getInstance() {
+		return instance;
 	}
 
 	public ArrayList<Cart> getcList() {
@@ -19,7 +23,7 @@ public class CartDAO {
 	}
 
 	// 회원 삭제 시 카트 날리기
-	public void DeleteMember(String id) {
+	public void MemberDelete(String id) {
 		if (cList.size() == 0)
 			return;
 
@@ -43,23 +47,8 @@ public class CartDAO {
 		}
 	}
 
-	// 카테고리 삭제시 안에 있는 아이템 넘버들 받아와서 다 삭제
-	public void DeleteCategory(ArrayList<Integer> iNumList) {
-		if (iNumList.size() == 0)
-			return;
-		for (int i = 0; i < cList.size(); i += 1) {
-			for (int k = 0; k < iNumList.size(); k += 1) {
-				if (cList.get(i).getItemNum() == iNumList.get(k)) {
-					cList.remove(i);
-					i--;
-					break;
-				}
-			}
-		}
-	}
-
 	// 텍스트 파일 저장용 데이터 만들기
-	public String DataToFile() {
+	public static String DataToFile() {
 		String data = "";
 		if (cList.size() == 0)
 			return data;
@@ -71,17 +60,17 @@ public class CartDAO {
 	}
 
 	// 텍스트파일에서 문자열 받아와서 데이터 넣기
-	public void FileToData(String data) {
-		if(data.equals("")) return;
-		String datas[] = data.split("\n");
-		cList.clear();
+	public static void FileToData(List<String> cData) {
+		if (cData.isEmpty())
+			return;
+
 		int maxCartNum = 0;
-		for (int i = 0; i < datas.length; i += 1) {
+		for (int i = 0; i < cData.size(); i += 1) {
 			Cart c = new Cart();
-			String[] info = datas[i].split("/");
+			String[] info = cData.get(i).split("/");
 			c = c.CreateCart(info);
 			cList.add(c);
-			if(maxCartNum < Integer.parseInt(info[0])) {
+			if (maxCartNum < Integer.parseInt(info[0])) {
 				maxCartNum = Integer.parseInt(info[0]);
 			}
 		}
@@ -102,51 +91,38 @@ public class CartDAO {
 		return -1;
 	}
 
-	// 해당 로그인한 유저의 장바구니 목록 출력 - 카테고리 이름, 아이템 이름, 개수
-	public ArrayList<Integer> getMyCartList(String id) {
+	// 해당 로그인한 유저의 구매목록 출력 - 아이템 이름 , 가격, 개수, 총 금액
+	public boolean getMyCartList(String id) {
+		ItemDAO iDAO = ItemDAO.getInstance();
 		int cnt = 0;
-		ArrayList<Integer> nameList = new ArrayList<Integer>();
-		System.out.println("[%s] 장바구니 목록".formatted(id));
+		int sum = 0;
+		int total = 0;
+		
 		for (int i = 0; i < cList.size(); i += 1) {
-			if (cList.get(i).getId().equals(id)) {
-				String cgName = mallCont.getiDAO().getCategoryName(cList.get(i).getItemNum());
-				nameList.add(cList.get(i).getCartNum());
-				System.out.println("[" + (++cnt) + "]" + cgName + cList.get(i));
+			if (cList.get(i).getId().equals(id)) { // 내 구매 목록 찾으면
+				Item myItem = iDAO.itemVelue(cList.get(i).getItemNum());
+				int sumMoney = cList.get(i).getItemCnt()*myItem.getPrice();
+				
+				System.out.println("[%d] %7s (%d원) %d개 총 %7d원"
+				.formatted(++cnt, myItem.getItemName(), myItem.getPrice(), cList.get(i).getItemCnt(), sumMoney));
+		
+				total += sumMoney;
+				sum += cList.get(i).getItemCnt();
 			}
 		}
-		return nameList;
+		System.out.println("총 %d개 ( %d 원 )".formatted(sum, total));
+		return cnt == 0 ? true : false;
 	}
-	
-	// 장바구니 1개 아이템 삭제 - 맴버용 : info[0] categoryName, info[1] itemName
-	public void MemberCartOneDelete(int cartNum) {
-		for(int i=0 ; i<cList.size() ; i+=1) {
-			if(cartNum == cList.get(i).getCartNum()) {
-				cList.remove(i);
-				break;
-			}
-		}
-	}	
-	
+
 	// 장바구니 비우기 - 맴버용 : info[0] categoryName, info[1] itemName
 	public void MemberCartAllDelete(ArrayList<Integer> nameList) {
-		for(int i=0 ; i<nameList.size() ; i+=1) {
-			for(int k=0 ; k<cList.size() ; k+=1) {
-				if(nameList.get(i) == cList.get(k).getCartNum()) {
+		for (int i = 0; i < nameList.size(); i += 1) {
+			for (int k = 0; k < cList.size(); k += 1) {
+				if (nameList.get(i) == cList.get(k).getCartNum()) {
 					cList.remove(k);
 					break;
 				}
 			}
 		}
-	}
-	
-	// 내 장바구니에 있는 개수 반환
-	public void MyCartNum(String id) {
-		int cnt = 0;
-		for (int i = 0; i < cList.size(); i += 1) {
-			if (cList.get(i).getId().equals(id)) {
-				cnt++;
-			}
-		}
-		System.out.println("장바구니 개수 : %d개".formatted(cnt));
 	}
 }

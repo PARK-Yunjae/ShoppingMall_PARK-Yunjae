@@ -1,34 +1,37 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import dto.Item;
 
 public class ItemDAO {
-	private ArrayList<Item> itemList;
+	private static ItemDAO instance = new ItemDAO();
+	private static ArrayList<Item> itemList;
+	private static ArrayList<String> categoryList;
 
 	public ItemDAO() {
 		itemList = new ArrayList<Item>();
+		categoryList = new ArrayList<String>();
+	}
+
+	public static ItemDAO getInstance() {
+		return instance;
 	}
 
 	public ArrayList<Item> getItemList() {
 		return itemList;
 	}
 
-	// 아이템 이름 중복 - 카테고리이름도 일치
-	public int ItemNameValue(String cgName, String iName) {
-		if (itemList.size() == 0)
-			return -1;
-		for (int i = 0; i < itemList.size(); i += 1) {
-			String itemName = itemList.get(i).getItemName();
-			String categoriName = itemList.get(i).getCategoriName();
-			if (itemName.equals(iName) && categoriName.equals(cgName)) {
-				return i;
-			}
-		}
-		return -1;
+	public static ArrayList<String> getCategoryList() {
+		return categoryList;
+	}
+
+	public static void setCategoryList(ArrayList<String> categoryList) {
+		ItemDAO.categoryList = categoryList;
 	}
 
 	// 아이템 추가
@@ -36,114 +39,104 @@ public class ItemDAO {
 		itemList.add(new Item(cgName, iName, price));
 	}
 
-	// 아이템 수정
-	public void UpdateItem(String cgName, String iName, String price, int idx) {
-		Item data = itemList.get(idx);
-		String[] info = { data.getItemNum() + "", cgName, iName, price };
-		data = data.CreateItem(info);
-		itemList.set(idx, data);
-	}
-
 	// 아이템 삭제
-	public void DeleteItem(int idx) {
-		itemList.remove(idx);
-	}
-
-	// 아이템 목록
-	public ArrayList<Integer> ItemList(String cgName) {
-		ArrayList<Integer> arr = new ArrayList<Integer>();
-		int cnt = 0;
-		System.out.println("[" + cgName + " 목록]");
+	public void DeleteItem(int itemNum) {
 		for (int i = 0; i < itemList.size(); i += 1) {
-			if (itemList.get(i).getCategoriName().equals(cgName)) {
-				arr.add(itemList.get(i).getItemNum());
-				System.out.println("[%d] %s".formatted(++cnt, itemList.get(i).printItem()));
-			}
-		}
-		return arr;
-	}
-
-	// 카테고리 수정
-	public void UpdateCategory(String name, String newName) {
-		if (itemList.size() == 0)
-			return;
-		for (int i = 0; i < itemList.size(); i += 1) {
-			if (itemList.get(i).getCategoriName().equals(name)) {
-				itemList.get(i).setCategoriName(newName);
-			}
-		}
-	}
-
-	// 카테고리 삭제
-	public void DeleteCategory(String name) {
-		if (itemList.size() == 0)
-			return;
-		for (int i = 0; i < itemList.size(); i += 1) {
-			if (itemList.get(i).getCategoriName().equals(name)) {
+			if (itemList.get(i).getItemNum() == itemNum) {
 				itemList.remove(i);
-				i--;
+				break;
 			}
 		}
 	}
 
-	// 카테고리 이름 받아서 카테고리에 속하는 아이템 넘버 리스트 반납
-	public ArrayList<Integer> CategoriToItemList(String cgName) {
-		ArrayList<Integer> arr = new ArrayList<Integer>();
-		for (int i = 0; i < itemList.size(); i += 1) {
-			if (itemList.get(i).getCategoriName().equals(cgName)) {
-				arr.add(itemList.get(i).getItemNum());
-			}
-		}
-		return arr;
-	}
-	
 	// 텍스트 파일 저장용 데이터 만들기
-	public String DataToFile() {
+	public static String DataToFile() {
 		String data = "";
-		if(itemList.size() == 0) return data;
-		for(Item i : itemList) {
+		if (itemList.size() == 0)
+			return data;
+		for (Item i : itemList) {
 			data += i.DataToFile() + "\n";
 		}
-		data = data.substring(0, data.length()-1);
+		data = data.substring(0, data.length() - 1);
 		return data;
 	}
-	
+
 	// 텍스트파일에서 문자열 받아와서 데이터 넣기 - 셋에 카테고리 넣어서 전달
-	public void FileToData(String data) {
-		if(data.equals("")) return;
-		String datas[] = data.split("\n");
-		itemList.clear();
+	public static void FileToData(List<String> iData) {
+		if (iData.isEmpty())
+			return;
+
 		int maxItemNum = 0;
-		for(int i=0 ; i<datas.length ; i+=1) {
+		for (int i = 0; i < iData.size(); i += 1) {
 			Item item = new Item();
-			String[] info = datas[i].split("/");
+			String[] info = iData.get(i).split("/");
 			item = item.CreateItem(info);
 			itemList.add(item);
-			if(maxItemNum < Integer.parseInt(info[0])) {
+			if (maxItemNum < Integer.parseInt(info[0])) {
 				maxItemNum = Integer.parseInt(info[0]);
 			}
 		}
 		Item.setNum(maxItemNum);
+		categoryList = FileToDataCategory();
+	}
+
+	// 카테고리 선택하면 해당 이름 반환
+	public String getCategoryName(int categoryidx) {
+		return categoryList.get(categoryidx);
+	}
+
+	// 카테고리 내림차순(같다면 아이템 기준 내림차순) 정렬해서 출력
+	public void itemListPrint() {
+		System.out.println("===[ 카테고리별 아이템 목록]===");
+		itemList.stream().sorted(Comparator.comparing(Item::getCategoryName).thenComparing(Item::getItemName))
+				.forEach(System.out::println);
+	}
+
+	// 로드할떄 아이템을 넣은 후에 카테고리만 중복없이 가져오기
+	public static ArrayList<String> FileToDataCategory() {
+		Set<String> categoryList = new HashSet<String>();
+		for (int i = 0; i < itemList.size(); i += 1) {
+			categoryList.add(itemList.get(i).getCategoryName());
+		}
+		ArrayList<String> list = new ArrayList<>(categoryList);
+		return list;
+	}
+
+	// 아이템 추가시 카테고리 검사하고 추가
+	public void addCategory(String categoryName) {
+		long cnt = categoryList.stream().filter(c -> c.equals(categoryName)).count();
+		if (cnt == 0) {
+			categoryList.add(categoryName);
+		}
+	}
+	// 카테고리 리스트 출력
+	public void CategoryList() {
+		for(int i=0 ; i<categoryList.size() ; i+=1) {
+			System.out.println("[%d] %s".formatted(i+1, categoryList.get(i)));
+		}
 	}
 	
-	// 아이템 넘버로 카테고리 이름 찾아서 반환
-	public String getCategoryName(int itemNum) {
-		String name = "";
-		for(int i=0 ; i<itemList.size() ; i+=1) {
-			if(itemList.get(i).getItemNum() == itemNum) {
-				name = itemList.get(i).toString();
+	// 카테고리 이름 받아서 카테고리에 속하는 아이템 넘버 리스트 반납
+	// 여기서 출력으로 리스트도 보여줌
+	public ArrayList<Item> CategoriToItemList(String cgName) {
+		ArrayList<Item> cgToItemList = new ArrayList<Item>();
+		int cnt = 1;
+		for (int i = 0; i < itemList.size(); i += 1) {
+			if (itemList.get(i).getCategoryName().equals(cgName)) {
+				cgToItemList.add(itemList.get(i));
+				System.out.println("[%d] %s %d원".formatted(cnt++, itemList.get(i).getItemName(), itemList.get(i).getPrice()));
 			}
 		}
-		return name;
+		return cgToItemList;
 	}
 	
-	// 로드할떄 아이템을 넣은 후에 카테고리만 중복없이 가져오기
-	public ArrayList<String> getCategoryList(){
-		Set<String> cgList=new HashSet<String>();
+	// 아이템 넘버로 아이템 찾아서 넘겨주는 매서드
+	public Item itemVelue(int itemNum) {
 		for(int i=0 ; i<itemList.size() ; i+=1) {
-			cgList.add(itemList.get(i).getCategoriName());
+			if(itemList.get(i).getItemNum() == itemNum) {
+				return itemList.get(i);
+			}
 		}
-		ArrayList<String> list = new ArrayList<>(cgList);
-		return list;
+		return null;
 	}
 }

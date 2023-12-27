@@ -6,9 +6,9 @@ public class Board {
 	private static int num;
 	private int boardNum;
 	private String title;
+	private String contents;
 	private String id;
 	private String date;
-	private String contents;
 	private int hits;
 	
 	public Board() {
@@ -48,21 +48,21 @@ public class Board {
 		this.hits = hits;
 	}
 
-	public Board(String title, String id, String contents) {
+	public Board(String title, String contents, String id) {
 		this.boardNum = ++num;
 		this.title = title;
+		this.contents = contents;
 		this.id = id;
 		this.date = LocalDate.now().toString();
-		this.contents = contents;
 		this.hits = 0;
 	}
 
-	private Board(String boardNum, String title, String id, String date, String contents, String hits) {
+	private Board(String boardNum, String title, String contents, String id, String date, String hits) {
 		this.boardNum = Integer.parseInt(boardNum);
 		this.title = title;
+		this.contents = contents;
 		this.id = id;
 		this.date = date;
-		this.contents = contents;
 		this.hits = Integer.parseInt(hits);
 	}
 	
@@ -73,7 +73,7 @@ public class Board {
 	}
 	
 	public void PrintBoard() {
-		System.out.println("[%d]%s".formatted(boardNum, title));
+		System.out.println("[ 제목 : %s\t작성자 : %s\t날짜 : %s\t조회수 : %d".formatted(title, id, date, hits));
 	}
 	
 	public String DataToFile() {
@@ -82,8 +82,8 @@ public class Board {
 	
 	// 게시글 보여주기
 	public void ViewPage() {
-		System.out.printf("[작성자 : %s\t작성일 : %s\t 조회수 : %d]\n", id, date, hits);
-		System.out.printf("[제목 : %s]\n", title);
-		System.out.printf("[내용 : %s]\n", contents);
+		System.out.printf("[ 제목 : %s\t작성자 : %s\t 날짜 : %s\t 조회수 : %d]\n",title, id, date, hits);
+		System.out.println("---------------------------------------------");
+		System.out.println(contents);
 	}
 }
