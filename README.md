@@ -35,7 +35,7 @@
 
 	[1] 아이템 추가	AdminItemAdd		
 	[2] 아이템 삭제	AdminItemDelete
-	[3] 총 매출 	AdminRevenue
+	[3] 총 매출 	AdminItemRevenue
 	[4] 뒤로 가기	AdminMain
 	[0] 종료	""
 
