@@ -47,16 +47,16 @@
 
 >3. 게시판관리 : AdminBoard
 
-	[1] 게시글 목록	AdminBoardList
-	[2] 게시글 삭제	AdminBoardDelete
+	[1] 게시글 목록	BoardList
+	[2] 게시글 삭제	BoardDelete
 	[3] 뒤로 가기	AdminMain
 	[0] 종료 	""
 
 	1번 선택 시
 
-	[1] 이전 	AdminBoardBeforePage
-	[2] 이후 	AdminBoardAfterPage
-	[3] 게시글보기 	AdminBoardViewPage
+	[1] 이전 	BoardBeforePage
+	[2] 이후 	BoardAfterPage
+	[3] 게시글보기 	BoardViewPage
 	[4] 뒤로가기	AdminBoard
 	[0] 종료 	""
 
@@ -64,7 +64,8 @@
 
 >4. 로그 아웃 : 로그아웃 시 ID값 ""로 변경 - MallMain으로 감
 
->5. 파일 저장 : 각각 DAO 에서 data String 파일 만들어서 AdminFileSave에 넘겨주고 txt 파일 만들기
+>5. 파일 저장 : AdminFileSave
+	       각각 DAO 에서 data String 파일 만들어서 AdminFileSave에 넘겨주고 txt 파일 만들기
 	       Board.txt 	cart.txt 	item.txt	member.txt
 
 > 0. 종료 : ""
@@ -92,9 +93,9 @@
 
 >3. 게시판 : MemberBoard
 
-	[1] 게시글 목록 	MemberBoardList
-	[2] 게시글 추가 	MemberBoardAdd
-	[3] 게시글 삭제	MemberBoardDelete
+	[1] 게시글 목록 	BoardList
+	[2] 게시글 추가 	BoardAdd
+	[3] 게시글 삭제	BoardDelete
 	[4] 뒤로가기 	MemberMain
 	[0] 종료	""
 
@@ -105,9 +106,9 @@
 
 	1번 선택 시
 
-	[1] 이전 	MemberBoardBefore
-	[2] 이후 	MemberBoardAfter
-	[3] 게시글보기	MemberBoardViewPage
+	[1] 이전 	BoardBefore
+	[2] 이후 	BoardAfter
+	[3] 게시글보기	BoardViewPage
 	[4] 뒤로가기	MemberBoard
 	[0] 종료	""
 
@@ -115,8 +116,8 @@
 	본인 게시글만 삭제 가능
 	내 게시글 선택 시 
 
-	[1] 삭제	MemberBoardMyPageDelete
-	[2] 뒤로가기	MemberBoardList
+	[1] 삭제	BoardDeletePage
+	[2] 뒤로가기	MemberBoard
 	[0] 종료	""
 
 >4. 나의 정보 : MemberInfo
