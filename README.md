@@ -83,8 +83,7 @@
 >2. 구매내역 : MemberCart
 
 	[1] 쇼핑하기 	MemberCartBuy
-	[2] 비우기	MemberCartClear
-	[3] 뒤로가기 	MemberMain
+	[2] 뒤로가기 	MemberMain
 	[0] 종료	""
 
 	현재 로그인중인 유저의 카트 목록 출력(아이템, 가격, 개수, 총 가격)
