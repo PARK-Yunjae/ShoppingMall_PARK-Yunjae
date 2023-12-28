@@ -46,7 +46,7 @@ public class MallController {
 		id = "";
 		next = "";
 		mcMap = new HashMap<>();
-		mcMap.put("MallMain", new _MailMain()); // 메인메뉴
+		mcMap.put("MallMain", new _MallMain()); // 메인메뉴
 		mcMap.put("MallJoin", new MallJoin()); // 회원가입
 		mcMap.put("MallLogin", new MallLogin()); // 로그인
 		mcMap.put("AdminMain", new _AdminMain()); // 관리자 메인메뉴

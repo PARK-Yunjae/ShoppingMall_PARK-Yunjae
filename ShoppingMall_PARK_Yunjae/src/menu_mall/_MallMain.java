@@ -4,7 +4,7 @@ import _mall.MenuCommand;
 import controller.MallController;
 import util.Util;
 
-public class _MailMain implements MenuCommand{
+public class _MallMain implements MenuCommand{
 	private MallController cont = MallController.getInstance();
 
 	@Override
