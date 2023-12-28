@@ -130,17 +130,18 @@ public class CartDAO {
 	public void ItemRevenue(int[][] arr){
 		for(Cart c : cList) {
 			for(int i=0 ; i<arr.length ; i++) {
-				if(c.getItemNum() == arr[i][0]) {
-					arr[i][1] += c.getItemCnt();
+				// itemNum이 일치하면 갯수 추가
+				if(c.getItemNum() == arr[i][1]) {
+					arr[i][2] += c.getItemCnt();
 					break;
 				}
 			}
 		}
-		// 순위도 여기서 매기고
+		// 순위도 여기서 매기고 - 아이템 개수 기준
 		for(int i=0 ; i<arr.length ; i++) {
 			for(int k=0 ; k<arr.length ; k+=1) {
-				if(arr[i][1] <= arr[k][1]) {
-					arr[i][2] += 1;
+				if(arr[i][2] <= arr[k][2]) {
+					arr[i][3] += 1;
 				}
 			}
 		}

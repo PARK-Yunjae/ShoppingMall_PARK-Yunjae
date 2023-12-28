@@ -1,6 +1,8 @@
 package dao;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -109,13 +111,14 @@ public class ItemDAO {
 			categoryList.add(categoryName);
 		}
 	}
+
 	// 카테고리 리스트 출력
 	public void CategoryList() {
-		for(int i=0 ; i<categoryList.size() ; i+=1) {
-			System.out.println("[%d] %s".formatted(i+1, categoryList.get(i)));
+		for (int i = 0; i < categoryList.size(); i += 1) {
+			System.out.println("[%d] %s".formatted(i + 1, categoryList.get(i)));
 		}
 	}
-	
+
 	// 카테고리 이름 받아서 카테고리에 속하는 아이템 넘버 리스트 반납
 	// 여기서 출력으로 리스트도 보여줌
 	public ArrayList<Item> CategoriToItemList(String cgName) {
@@ -124,36 +127,52 @@ public class ItemDAO {
 		for (int i = 0; i < itemList.size(); i += 1) {
 			if (itemList.get(i).getCategoryName().equals(cgName)) {
 				cgToItemList.add(itemList.get(i));
-				System.out.println("[%d] %s %d원".formatted(cnt++, itemList.get(i).getItemName(), itemList.get(i).getPrice()));
+				System.out.println(
+						"[%d] %s %d원".formatted(cnt++, itemList.get(i).getItemName(), itemList.get(i).getPrice()));
 			}
 		}
 		return cgToItemList;
 	}
-	
+
 	// 아이템 넘버로 아이템 찾아서 넘겨주는 매서드
 	public Item itemVelue(int itemNum) {
-		for(int i=0 ; i<itemList.size() ; i+=1) {
-			if(itemList.get(i).getItemNum() == itemNum) {
+		for (int i = 0; i < itemList.size(); i += 1) {
+			if (itemList.get(i).getItemNum() == itemNum) {
 				return itemList.get(i);
 			}
 		}
 		return null;
 	}
-	
+
 	// 아이템 번호 받아서 전달할 메서드
-	public int[][] itemNumList(){
-		int[][] arr = new int[itemList.size()][3];
-		
-		for(int i=0 ; i<arr.length ; i+=1) {
-			arr[i][0] = itemList.get(i).getItemNum();
+	public int[][] itemNumList() {
+		int[][] arr = new int[itemList.size()][4];
+
+		for (int i = 0; i < arr.length; i += 1) {
+			arr[i][0] = i;	// 방번호
+			arr[i][1] = itemList.get(i).getItemNum();
 		}
-		
+
 		return arr;
 	}
-	
+
+	// 카트에서 팔린 개수 받아와서 순위 오름차순 출력
 	public void ItemRevenue(int[][] arr) {
-		for(int i=0 ; i<itemList.size() ; i+=1) {
-			itemList.get(arr[i][0]).toString();
+		// 순위로 정렬해보고
+		for (int i = 0; i < arr.length; i += 1) {
+			for (int k = 0; k < arr.length; k += 1) {
+				if (arr[i][3] < arr[k][3]) {
+					int[] data = arr[i];
+					arr[i] = arr[k];
+					arr[k] = data;
+				}
+			}
+		}
+
+		for (int i = 0; i < arr.length; i += 1) {
+			if (arr[i][2] == 0)
+				break;
+			System.out.printf("%s %d개\n", itemList.get(arr[i][0]), arr[i][2]);
 		}
 	}
 }

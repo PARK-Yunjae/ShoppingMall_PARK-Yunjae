@@ -17,8 +17,8 @@ public class AdminItemRevenue implements MenuCommand {
 		// ItemDAO에서 일단 itemNum개수만큼 번호도 저장해서 배열로 받아옴
 		int[][] arr = iDAO.itemNumList();
 		cDAO.ItemRevenue(arr);
-		// arr[itemList.size()][3] 
-		// 0번엔 아이템 번호 1번엔 개수 2번엔 랭크
+		// arr[itemList.size()][4] 
+		// 0번 아이템리스트방번호 1번엔 아이템 넘버 2번엔 카트에서 받아온 팔린 개수 3번은 랭크
 		iDAO.ItemRevenue(arr); 
 		return false;
 	}

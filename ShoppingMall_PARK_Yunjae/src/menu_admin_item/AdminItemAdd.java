@@ -1,7 +1,5 @@
 package menu_admin_item;
 
-import java.util.Comparator;
-
 import _mall.MenuCommand;
 import controller.MallController;
 import dao.ItemDAO;
