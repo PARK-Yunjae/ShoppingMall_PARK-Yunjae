@@ -5,11 +5,7 @@ import controller.MallController;
 import dao.BoardDAO;
 
 public class BoardAfterPage implements MenuCommand{
-	private MallController cont;
-	@Override
-	public void init() {
-		cont = MallController.getInstance();
-	}
+	private MallController cont = MallController.getInstance();
 
 	@Override
 	public boolean update() {

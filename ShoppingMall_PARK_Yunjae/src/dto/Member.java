@@ -39,7 +39,7 @@ public class Member {
 	}
 	
 	public Member(String id, String pw, String memberName) {
-		this.memberNum = num++;
+		this.memberNum = ++num;
 		this.id = id;
 		this.pw = pw;
 		this.memberName = memberName;

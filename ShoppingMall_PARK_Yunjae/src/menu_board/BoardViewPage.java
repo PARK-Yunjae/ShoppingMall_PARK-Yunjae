@@ -6,12 +6,7 @@ import dao.BoardDAO;
 import util.Util;
 
 public class BoardViewPage implements MenuCommand{
-	private MallController cont;
-
-	@Override
-	public void init() {
-		cont = MallController.getInstance();
-	}
+	private MallController cont = MallController.getInstance();
 
 	@Override
 	public boolean update() {

@@ -35,7 +35,7 @@ public class Cart {
 	}
 
 	public Cart(String id, String itemNum, String itemCnt) {
-		this.cartNum = num++;
+		this.cartNum = ++num;
 		this.id = id;
 		this.itemNum = Integer.parseInt(itemNum);
 		this.itemCnt = Integer.parseInt(itemCnt);

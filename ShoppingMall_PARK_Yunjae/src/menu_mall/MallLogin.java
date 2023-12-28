@@ -6,16 +6,7 @@ import dao.MemberDAO;
 import util.Util;
 
 public class MallLogin implements MenuCommand {
-	private MallController cont;
-
-	public MallLogin() {
-		init();
-	}
-
-	@Override
-	public void init() {
-		cont = MallController.getInstance();
-	}
+	private MallController cont = MallController.getInstance();
 
 	@Override
 	public boolean update() {

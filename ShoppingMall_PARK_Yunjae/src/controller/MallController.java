@@ -12,7 +12,6 @@ import menu_admin_member.*;
 import menu_board.*;
 import menu_mall.*;
 import menu_member.*;
-import menu_member_cart.*;
 import menu_member_info.*;
 
 public class MallController {
@@ -69,15 +68,12 @@ public class MallController {
 		mcMap.put("MemberMain", new _MemberMain()); // 사용자 메인
 		mcMap.put("MemberShopping", new MemberShopping()); // 사용자 쇼핑
 		mcMap.put("MemberCart", new MemberCart()); // 사용자 구매내역 메인
-		mcMap.put("MemberCartBuy", new MemberCartBuy()); // 쇼핑하기
-		mcMap.put("MemberCartClear", new MemberCartClear()); // 비우기
 		mcMap.put("MemberBoard", new MemberBoard()); // 사용자 게시판 메인
 		mcMap.put("MemberInfo", new MemberInfo()); // 사용자 나의 정보 메인
 		mcMap.put("MemberInfoPwUpdate", new MemberInfoPwUpdate()); // 사용자 비밀번호 변경
 		mcMap.put("MemberQuit", new MemberQuit()); // 회원 탈퇴
-		
+
 		mc = mcMap.get("MallMain");
-		mc.init();
 
 		FileDAO.getInstance(); // 불러오면 생성자에서 init실행
 		update();
@@ -88,7 +84,6 @@ public class MallController {
 			if (!mc.update()) {
 				if (!next.equals("")) {
 					mc = mcMap.get(next);
-					mc.init();
 				} else {
 					return;
 				}

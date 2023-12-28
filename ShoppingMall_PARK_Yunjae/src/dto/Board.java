@@ -57,12 +57,12 @@ public class Board {
 		this.hits = 0;
 	}
 
-	private Board(String boardNum, String title, String contents, String id, String date, String hits) {
+	private Board(String boardNum, String title, String id, String date, String contents, String hits) {
 		this.boardNum = Integer.parseInt(boardNum);
 		this.title = title;
-		this.contents = contents;
 		this.id = id;
 		this.date = date;
+		this.contents = contents;
 		this.hits = Integer.parseInt(hits);
 	}
 	
@@ -82,7 +82,7 @@ public class Board {
 	
 	// 게시글 보여주기
 	public void ViewPage() {
-		System.out.printf("[ 제목 : %s\t작성자 : %s\t 날짜 : %s\t 조회수 : %d]\n",title, id, date, hits);
+		System.out.printf("[ 제목 : %10s 작성자 : %10s 날짜 : %11s 조회수 : %d]\n",title, id, date, hits);
 		System.out.println("---------------------------------------------");
 		System.out.println(contents);
 	}

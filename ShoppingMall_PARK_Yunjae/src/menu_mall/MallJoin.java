@@ -11,17 +11,8 @@ import util.Util;
 
 public class MallJoin implements MenuCommand{
 
-	private MallController cont;
+	private MallController cont = MallController.getInstance();;
 	private String pwPattern = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{4,20}$";
-
-	public MallJoin() {
-		init();
-	}
-	
-	@Override
-	public void init() {
-		cont = MallController.getInstance();
-	}
 
 	@Override
 	public boolean update() {

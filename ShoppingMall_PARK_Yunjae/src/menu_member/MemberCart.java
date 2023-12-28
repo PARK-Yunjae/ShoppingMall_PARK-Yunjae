@@ -6,12 +6,7 @@ import dao.CartDAO;
 import util.Util;
 
 public class MemberCart implements MenuCommand {
-	private MallController cont;
-
-	@Override
-	public void init() {
-		cont = MallController.getInstance();
-	}
+	private MallController cont = MallController.getInstance();
 
 	@Override
 	public boolean update() {
@@ -43,10 +38,7 @@ public class MemberCart implements MenuCommand {
 			cont.setNext("MemberMain");
 		} else if (sel == 0) {
 			cont.setNext("");
-		} else {
-			return true;
-		}
-
+		} 
 		return false;
 	}
 

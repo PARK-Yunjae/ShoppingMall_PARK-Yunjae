@@ -139,4 +139,21 @@ public class ItemDAO {
 		}
 		return null;
 	}
+	
+	// 아이템 번호 받아서 전달할 메서드
+	public int[][] itemNumList(){
+		int[][] arr = new int[itemList.size()][3];
+		
+		for(int i=0 ; i<arr.length ; i+=1) {
+			arr[i][0] = itemList.get(i).getItemNum();
+		}
+		
+		return arr;
+	}
+	
+	public void ItemRevenue(int[][] arr) {
+		for(int i=0 ; i<itemList.size() ; i+=1) {
+			itemList.get(arr[i][0]).toString();
+		}
+	}
 }

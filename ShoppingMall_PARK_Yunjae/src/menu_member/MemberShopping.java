@@ -11,12 +11,7 @@ import dto.Item;
 import util.Util;
 
 public class MemberShopping implements MenuCommand{
-	private MallController cont;
-
-	@Override
-	public void init() {
-		cont = MallController.getInstance();
-	}
+	private MallController cont = MallController.getInstance();
 
 	@Override
 	public boolean update() {

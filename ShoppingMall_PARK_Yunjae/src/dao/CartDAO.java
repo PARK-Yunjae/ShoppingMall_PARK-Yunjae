@@ -125,4 +125,24 @@ public class CartDAO {
 			}
 		}
 	}
+	
+	// 카트에 저장되어 있는 아이템 개수 받아오기
+	public void ItemRevenue(int[][] arr){
+		for(Cart c : cList) {
+			for(int i=0 ; i<arr.length ; i++) {
+				if(c.getItemNum() == arr[i][0]) {
+					arr[i][1] += c.getItemCnt();
+					break;
+				}
+			}
+		}
+		// 순위도 여기서 매기고
+		for(int i=0 ; i<arr.length ; i++) {
+			for(int k=0 ; k<arr.length ; k+=1) {
+				if(arr[i][1] <= arr[k][1]) {
+					arr[i][2] += 1;
+				}
+			}
+		}
+	}
 }

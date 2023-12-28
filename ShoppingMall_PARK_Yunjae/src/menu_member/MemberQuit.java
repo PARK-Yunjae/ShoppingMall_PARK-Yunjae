@@ -2,28 +2,26 @@ package menu_member;
 
 import _mall.MenuCommand;
 import controller.MallController;
+import dao.CartDAO;
+import dao.MemberDAO;
 
 public class MemberQuit implements MenuCommand{
 
-	private MallController mallCont;
-
-	@Override
-	public void init() {
-		mallCont = MallController.getInstance();
-	}
+	private MallController cont = MallController.getInstance();
 
 	@Override
 	public boolean update() {
-		mallCont.setNextMenu("MallMain");
-		int idIdx = mallCont.getmDAO().idValue(mallCont.getId());
+		MemberDAO mDAO = MemberDAO.getInstance();
+		CartDAO cDAO = CartDAO.getInstance();
+		
+		cont.setNext("MallMain");
+		int idIdx = mDAO.idValue(cont.getId());
 		// 맴버리스트에서 id 삭제
-		mallCont.getmDAO().DeleteMember(idIdx);	
+		mDAO.MemberDelete(idIdx);
 		// 카트에서도 id와 일치하는 값 삭제
-		mallCont.getcDAO().DeleteMember(mallCont.getId());	
-		// 게시판 글도 삭제
-		mallCont.getbDAO().DeleteMember(mallCont.getId());	
-		System.out.println("[%s] 회원 탈퇴 완료".formatted(mallCont.getId()));
-		mallCont.setId("");
+		cDAO.MemberDelete(cont.getId());		
+		System.out.println("[%s] 회원 탈퇴 완료".formatted(cont.getId()));
+		cont.setId("");
 		return false;
 	}
 }
